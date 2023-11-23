@@ -32,7 +32,7 @@ Route::prefix('login')->group(function(){
 Route::prefix('books')->group(function(){
     Route::get('/read', [BookController::class, 'index']);
 
-    Route::get('/read/get/{id}',[BookController::class, 'show']);
+    Route::get('/read/get/{slug}',[BookController::class, 'show']);
 
     Route::post('/add', [BookController::class, 'store']);
 });
