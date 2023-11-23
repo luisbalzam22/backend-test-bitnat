@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Book;
+use App\Http\Controllers\BookController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,17 +30,11 @@ Route::prefix('login')->group(function(){
 });
 
 Route::prefix('books')->group(function(){
-    Route::get('/read', function(){
-        return Book::all();
-    });
+    Route::get('/read', [BookController::class, 'index']);
 
-    Route::get('/read/get', function(){
-        return 'HEEERE!';
-    });
+    Route::get('/read/get/{id}',[BookController::class, 'show']);
 
-    Route::post('/add', function(){
-        return 'HEEERE!';
-    });
+    Route::post('/add', [BookController::class, 'store']);
 });
 
 
