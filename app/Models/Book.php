@@ -9,8 +9,16 @@ class Book extends Model
 {
     use HasFactory;
 
+    protected static function boot() {
+        parent::boot();
+
+        static::creating(function ($book) {
+            $book->slug = Str::slug($book->name);
+        });
+    }
+
     protected $fillable = [
-        'name',
+        'title',
         'author',
         'slug',
         'genre',

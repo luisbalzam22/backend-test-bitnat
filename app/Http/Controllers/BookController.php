@@ -22,8 +22,7 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'slug' => 'required',
+            'title' => 'required',
             'release_date' => 'required'
         ]);
         return Book::create($request->all());
@@ -32,9 +31,9 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $slug)
     {
-        return Book::find($id);
+        return Book::where('slug', $slug)->firstOrFail();
     }
 
     /**
