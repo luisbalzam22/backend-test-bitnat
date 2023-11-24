@@ -25,8 +25,13 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login()
+    public function login(Request $request)
     {
+        $request->validate([
+            'email' => 'required|string|email|max:100|',
+            'password' => 'required|string|min:6|'
+        ]);
+
         $credentials = request(['email', 'password']);
 
         if (! $token = auth()->attempt($credentials)) {
@@ -44,18 +49,6 @@ class AuthController extends Controller
     public function me()
     {
         return response()->json(auth()->user());
-    }
-
-    /**
-     * Log the user out (Invalidate the token).
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function logout()
-    {
-        auth()->logout();
-
-        return response()->json(['message' => 'Successfully logged out']);
     }
 
     /**

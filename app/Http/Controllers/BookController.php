@@ -9,46 +9,31 @@ use Illuminate\Http\Request;
 class BookController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of books.
      */
-    public function index()
+    public function getBooks()
     {
         return Book::all();
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created book in storage.
      */
-    public function store(Request $request)
+    public function addBook(Request $request)
     {
         $request->validate([
             'title' => 'required',
             'release_date' => 'required'
         ]);
+        $this->authorize('addBook',Book::class);
         return Book::create($request->all());
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified book.
      */
-    public function show(string $slug)
+    public function getBook(string $id)
     {
-        return Book::where('slug', $slug)->firstOrFail();
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return Book::findOrFail($id);
     }
 }

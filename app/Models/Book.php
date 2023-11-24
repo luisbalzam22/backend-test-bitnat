@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +13,7 @@ class Book extends Model
         parent::boot();
 
         static::creating(function ($book) {
-            $book->slug = Str::slug($book->name);
+            $book->slug = Str::slug($book->title.'-'.$book->author);
         });
     }
 

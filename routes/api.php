@@ -27,11 +27,11 @@ Route::prefix('login')->group(function(){
 });
 
 Route::prefix('books')->group(function(){
-    Route::get('/read', [BookController::class, 'index']);
+    Route::get('/read', [BookController::class, 'getBooks']);
 
-    Route::get('/read/get/{slug}',[BookController::class, 'show']);
+    Route::get('/read/get/{id}',[BookController::class, 'getBook']);
 
-    Route::post('/add', [BookController::class, 'store']);
+    Route::post('/add', [BookController::class, 'addBook']);
 });
 
 

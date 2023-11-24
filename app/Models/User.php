@@ -19,7 +19,7 @@ class User extends Authenticatable implements JWTSubject
         parent::boot();
 
         static::creating(function ($user) {
-            $user->role = USER_GROUPS[0];
+            $user->role = USER_GROUPS['BASIC'];
         });
     }
 
@@ -73,6 +73,9 @@ class User extends Authenticatable implements JWTSubject
      */
     public function getJWTCustomClaims()
     {
-        return [];
+        return ['role' => $this->role,
+            'name' => $this->name,
+            'email' => $this->email
+        ];
     }
 }
