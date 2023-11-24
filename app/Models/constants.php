@@ -1,7 +1,7 @@
 <?php
 
 /**
- * String constants that allow to determine whether an authenticated user can add books.
+ * String constants that allow to determine wether an authenticated user can add books.
  */
 define('USER_GROUPS', [
   'BASIC' => 'basic',
