@@ -80,6 +80,9 @@ class User extends Authenticatable implements JWTSubject
         ];
     }
 
+    /**
+     * Returns pivot table ref.
+     */
     public function books()
     {
         return $this->belongsToMany(Book::class);

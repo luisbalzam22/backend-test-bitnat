@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+require_once __DIR__.'/../../Models/constants.php';
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;

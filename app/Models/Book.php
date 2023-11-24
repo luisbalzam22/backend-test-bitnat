@@ -23,6 +23,9 @@ class Book extends Model
         'cover_image_url'
     ];
 
+    /**
+     * Returns pivot table ref.
+     */
     public function users()
     {
         return $this->belongsToMany(User::class);

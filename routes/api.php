@@ -32,7 +32,7 @@ Route::prefix('books')->group(function(){
 
     Route::get('/read', [BookController::class, 'getBooks']);
 
-    Route::get('/read/get/{id}',[BookController::class, 'getBook']);
+    Route::get('/read/get/{id}', [BookController::class, 'getBook']);
 
     Route::post('/add', [BookController::class, 'addBook']);
 });
