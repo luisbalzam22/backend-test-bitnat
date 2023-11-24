@@ -5,15 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class BookController extends Controller
 {
     /**
      * Display a listing of books.
      */
-    public function getBooks()
+    public function getBooks(Request $request)
     {
-        return Book::all();
+        return QueryBuilder::for(Book::class)->allowedSorts('title', 'author','release_date', 'genre')->get();
     }
 
     /**
@@ -21,11 +22,17 @@ class BookController extends Controller
      */
     public function addBook(Request $request)
     {
+        $this->authorize('addBook', Book::class);
+
         $request->validate([
-            'title' => 'required',
-            'release_date' => 'required'
+            'title' => 'required|string|max:100',
+            'release_date' => 'required|date',
+            'genre' => 'required|string|max:50',
+            'author' => 'required|string|min:2',
+            'cover_image_url' => 'required|url',
+            'description' => 'required|string|max:300'
         ]);
-        $this->authorize('addBook',Book::class);
+
         return Book::create($request->all());
     }
 

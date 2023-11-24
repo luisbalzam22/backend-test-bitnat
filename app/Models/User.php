@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-require __DIR__.'/constants.php';
+require_once __DIR__.'/constants.php';
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

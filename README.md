@@ -2,166 +2,126 @@
 
 Sample Backend API project built in Laravel v10.10
 
-## :ledger: Index
+---
 
--   [About](#beginner-about)
--   [Usage](#zap-usage)
-    -   [Installation](#electric_plug-installation)
-    -   [Commands](#package-commands)
--   [Development](#wrench-development)
-    -   [Pre-Requisites](#notebook-pre-requisites)
-    -   [Developmen Environment](#nut_and_bolt-development-environment)
-    -   [File Structure](#file_folder-file-structure)
-    -   [Build](#hammer-build)
-    -   [Deployment](#rocket-deployment)
--   [Community](#cherry_blossom-community)
-    -   [Contribution](#fire-contribution)
-    -   [Branches](#cactus-branches)
-    -   [Guideline](#exclamation-guideline)
--   [FAQ](#question-faq)
--   [Resources](#page_facing_up-resources)
--   [Gallery](#camera-gallery)
--   [Credit/Acknowledgment](#star2-creditacknowledgment)
--   [License](#lock-license)
+## About
 
-## :beginner: About
+This sample project was built by myself, Luis B. Mata, as a requirement on my hiring process. It features a "Virtual Library" which enables API consumers to get books listings -with some filtering- and authenticated users which have the "publisher" role to be able to add new books to the Library (project built in Laravel v10.10)
 
-This sample project was built by Luis B. Mata as a requirement in his hiring process. It features a "Virtual Library" which enables API consumers to get books listings -with some filtering- and authenticated users which have the "PUBLISHER" role to be able to add new books to the Library (built in Laravel v10.10)
+---
 
-## :zap: Usage
+# Getting started
 
-Write about how to use this project.
+## Installation
 
-### :electric_plug: Installation
+Please check the official laravel installation guide for server requirements before you start. [Official Documentation](https://laravel.com/docs/10.x#installation)
 
--   Steps on how to install this project, to use it.
--   Be very detailed here, For example, if you have tools which run on different operating systems, write installation steps for all of them.
+Clone the repository
 
-```
-$ add installations steps if you have to.
-```
+    git clone git@github.com:gothinkster/backend-test-bitnat.git
 
-### :package: Commands
+Switch to the repo folder
 
--   Commands to start the project.
+    cd backend-test-bitnat
 
-## :wrench: Development
+Install all the dependencies using composer
 
-If you want other people to contribute to this project, this is the section, make sure you always add this.
+    composer install
 
-### :notebook: Pre-Requisites
+Copy the example env file and make the required configuration changes in the .env file
 
-List all the pre-requisites the system needs to develop this project.
+    cp .env.example .env
 
--   A tool
--   B tool
+Generate a new application key
 
-### :nut_and_bolt: Development Environment
+    php artisan key:generate
 
-Write about setting up the working environment for your project.
+Generate a new JWT authentication secret key
 
--   How to download the project...
--   How to install dependencies...
+    php artisan jwt:generate
 
-### :file_folder: File Structure
+Run the database migrations (**Set the database connection in .env before migrating**)
 
-Add a file structure here with the basic details about files, below is an example.
+    php artisan migrate
 
-```
-.
-├── assets
-│   ├── css
-│   │   ├── index-ui.css
-│   │   └── rate-ui.css
-│   ├── images
-│   │   ├── icons
-│   │   │   ├── shrink-button.png
-│   │   │   └── umbrella.png
-│   │   ├── logo_144.png
-│   │   └── Untitled-1.psd
-│   └── javascript
-│       ├── index.js
-│       └── rate.js
-├── CNAME
-├── index.html
-├── rate.html
-└── README.md
-```
+Start the local development server
 
-| No  | File Name | Details     |
-| --- | --------- | ----------- |
-| 1   | index     | Entry point |
+    php artisan serve
 
-### :hammer: Build
+You can now access the server at http://localhost:8000
 
-Write the build Instruction here.
+**TL;DR command list**
 
-### :rocket: Deployment
+    git clone git@github.com:gothinkster/backend-test-bitnat.git
+    cd backend-test-bitnat
+    composer install
+    cp .env.example .env
+    php artisan key:generate
+    php artisan jwt:generate
 
-Write the deployment instruction here.
+**Make sure you set the correct database connection information before running the migrations** [Environment variables](#environment-variables)
 
-## :cherry_blossom: Community
+    php artisan migrate
+    php artisan serve
 
-If it's open-source, talk about the community here, ask social media links and other links.
+## Database seeding
 
-### :fire: Contribution
+**Populate the database with seed data with relationships which includes users, articles, comments, tags, favorites and follows. This can help you to quickly start testing the api or couple a frontend and start using it with ready content.**
 
-Your contributions are always welcome and appreciated. Following are the things you can do to contribute to this project.
+Open the DummyDataSeeder and set the property values as per your requirement
 
-1.  **Report a bug** <br>
-    If you think you have encountered a bug, and I should know about it, feel free to report it [here]() and I will take care of it.
+    database/seeds/DummyDataSeeder.php
 
-2.  **Request a feature** <br>
-    You can also request for a feature [here](), and if it will viable, it will be picked for development.
+Run the database seeder and you're done
 
-3.  **Create a pull request** <br>
-    It can't get better then this, your pull request will be appreciated by the community. You can get started by picking up any open issues from [here]() and make a pull request.
+    php artisan db:seed
 
-> If you are new to open-source, make sure to check read more about it [here](https://www.digitalocean.com/community/tutorial_series/an-introduction-to-open-source) and learn more about creating a pull request [here](https://www.digitalocean.com/community/tutorials/how-to-create-a-pull-request-on-github).
+**_Note_** : It's recommended to have a clean database before seeding. You can refresh your migrations at any point to clean the database by running the following command
 
-### :cactus: Branches
+    php artisan migrate:refresh
 
-I use an agile continuous integration methodology, so the version is frequently updated and development is really fast.
+## API Specification
 
-1. **`stage`** is the development branch.
+This application adheres to the api specifications set by the Bitnat team in accordance to their "Prueba back-end BITNAT - Latest" provided test.
 
-2. **`master`** is the production branch.
+---
 
-3. No other permanent branches should be created in the main repository, you can create feature branches but they should get merged with the master.
+# Code overview
 
-**Steps to work with feature branch**
+## Dependencies
 
-1. To start working on a new feature, create a new branch prefixed with `feat` and followed by feature name. (ie. `feat-FEATURE-NAME`)
-2. Once you are done with your changes, you can raise PR.
+-   [jwt-auth](https://github.com/tymondesigns/jwt-auth) - For authentication using JSON Web Tokens
+-   [Laravel-query-builder](https://spatie.be/docs/laravel-query-builder/v5/introduction) - For query string parameters parsing
 
-**Steps to create a pull request**
+## Environment variables
 
-1. Make a PR to `stage` branch.
-2. Comply with the best practices and guidelines e.g. where the PR concerns visual elements it should have an image showing the effect.
-3. It must pass all continuous integration checks and get positive reviews.
+-   `.env` - Environment variables can be set in this file
 
-After this, changes will be merged.
+**_Note_** : You can quickly set the database information and other variables in this file and have the application fully working.
 
-### :exclamation: Guideline
+---
 
-coding guidelines or other things you want people to follow should follow.
+# Testing API
 
-## :question: FAQ
+Run the laravel development server
 
-You can optionally add a FAQ section about the project.
+    php artisan serve
 
-## :page_facing_up: Resources
+The api can now be accessed at
 
-Add important resources here
+    http://localhost:8000/api
 
-## :camera: Gallery
+Request headers
 
-Pictures of your project.
+| **Required** | **Key**       | **Value**          |
+| ------------ | ------------- | ------------------ |
+| Yes          | Content-Type  | application/json   |
+| Optional     | Authorization | Bearer Token {JWT} |
 
-## :star2: Credit/Acknowledgment
+---
 
-Credit the authors here.
+# Authentication & Authorization
 
-## :lock: License
+This applications uses JSON Web Token (JWT) to handle authentication and Custom "role" claims for authorization (through the Laravel Framork's native "Policy" feature). The token is passed with each request using the `Authorization` header with `Bearer Token` scheme.
 
-Add a license here, or a link to it.
+---
