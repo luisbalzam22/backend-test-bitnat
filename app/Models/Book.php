@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,18 +12,19 @@ class Book extends Model
 
     protected static function boot() {
         parent::boot();
-
-        static::creating(function ($book) {
-            $book->slug = Str::slug($book->title.'-'.$book->author);
-        });
     }
 
     protected $fillable = [
         'title',
         'author',
-        'slug',
         'genre',
-        'release_date',
+        'release_year',
         'description',
+        'cover_image_url'
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

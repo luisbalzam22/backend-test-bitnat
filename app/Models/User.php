@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Models\Book;
 require_once __DIR__.'/constants.php';
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -77,5 +78,10 @@ class User extends Authenticatable implements JWTSubject
             'name' => $this->name,
             'email' => $this->email
         ];
+    }
+
+    public function books()
+    {
+        return $this->belongsToMany(Book::class);
     }
 }

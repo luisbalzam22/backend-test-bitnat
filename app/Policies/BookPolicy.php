@@ -19,4 +19,13 @@ class BookPolicy
         return $user->role == USER_GROUPS['PUBLISHER'];
     }
 
+    /**
+     * Determine whether the user is authenticated, and can read a book.
+     */
+    public function getBook(User $user): bool
+    {
+
+        return $user->email && true ;
+    }
+
 }
